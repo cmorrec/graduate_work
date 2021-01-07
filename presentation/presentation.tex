@@ -1,0 +1,378 @@
+\documentclass[c]{beamer}  % [t], [c], или [b] --- вертикальное выравнивание на слайдах (верх, центр, низ)
+%\documentclass[handout]{beamer} % Раздаточный материал (на слайдах всё сразу)
+%\documentclass[aspectratio=169]{beamer} % Соотношение сторон
+
+\usetheme{Berkeley} % Тема оформления
+%\usetheme{Berlin}
+%\usetheme{Szeged}
+
+\usecolortheme{seahorse} % Цветовая схема
+%\useinnertheme{circles}
+%\useinnertheme{rectangles}
+
+%\usetheme{HSE}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%% Beamer по-русски
+\newtheorem{rtheorem}{Теорема}
+\newtheorem{rproof}{Доказательство}
+\newtheorem{rexample}{Пример}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+%\usepackage{multimedia}
+%\usepackage{media9}
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+%\usepackage{leqno} % Нумерация формул слева
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{pictures/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+%%% Другие пакеты
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+\usepackage{soul} % Модификаторы начертания
+\usepackage{csquotes} % Еще инструменты для ссылок
+%\usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex}
+\usepackage{multicol} % Несколько колонок
+
+%%% Картинки
+\usepackage{tikz} % Работа с графикой
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\title{Кусовая работа}
+\subtitle{Численное моделирование рудоразмольой мельницы методом дискретных элементов}
+\author{Катнов Артем}
+\date{\today}
+\institute[]{Московский государственный технический университет им. Н.Э.Баумана}
+
+\usepackage{movie15}
+\usepackage{hyperref}
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+
+\begin{frame}
+\tableofcontents
+\end{frame}
+
+\section{Метод дискретных элементов}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{sreda}
+	\includegraphics[width=0.4\textwidth]{sreda2}
+	\caption{Демонстрация сыпучей среды}
+
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{algorithm}
+	\caption{Алгоритм метода в общем виде}
+\end{figure} 
+\end{frame}
+
+\section{Описание модели}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Кинематика частиц}
+\begin{align}
+x &= x_0 + v^x_0 \cdot \Delta t + \dfrac{a^x_0 \cdot \Delta t^2}{2} + \dfrac{b^x_0 \cdot \Delta t^3}{6}\\
+y &= y_0 + v^y_0 \cdot \Delta t + \dfrac{a^y_0 \cdot \Delta t^2}{2} + \dfrac{b^y_0 \cdot \Delta t^3}{6}\\
+\vartheta &= \vartheta_0 + v^{\vartheta}_0 \cdot \Delta t + \dfrac{a^{\vartheta}_0 \cdot \Delta t^2}{2} + \dfrac{b^{\vartheta}_0 \cdot \Delta t^3}{6}
+\end{align}
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Итерационное уточнение}
+
+\begin{align}
+b_n &= \dfrac{a_{t + \Delta t} - a_{t}}{\Delta t} \label{eq:jerks} \\
+b_t &= \dfrac{a_{t + \Delta t} - a_{t}}{\Delta t} \label{jerk_tangent}\\
+b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t} \label{jerk_angular}
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Блок-схема итерационного уточнения}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.3\textwidth]{iter_cicle} 
+	\includegraphics[width=0.3\textwidth]{iter_one}
+	\label{pic:iter}
+\end{figure} 
+
+\end{frame}
+
+
+\subsection{Упрощения МДЭ}
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{dem-rigid-cluster}
+\end{figure} 
+\end{frame}
+
+\subsection{Контактные силы}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection \quad  в нормальном направлении}
+
+\begin{wrapfigure}{r}{0.15\textwidth}
+\includegraphics[width=0.15\textwidth]{vhod}
+\end{wrapfigure}
+
+\begin{equation}
+\label{norm_force}
+F_n = k_n \cdot \delta_n
+\end{equation}
+
+где $F_n$ --- контактная сила, возникающая в точке контакта и действующая на оба шара, [Н];
+
+$k_n$ --- коэффициент жёсткости, [Н/м];
+
+$\delta_n$ --- взаимное проникновение, так называемое вхождение шаров друг в друга, [м].
+
+\begin{equation}
+\label{kn_herz}
+k_n = \frac{4}{3} \cdot E_{eff} \cdot \sqrt{R_{eff} \cdot \delta_n}
+\end{equation}
+где 
+\[
+\dfrac{1}{E_{eff}} = \dfrac{1 - \nu_1^2}{E_1} + \dfrac{1 - \nu_2^2}{E_2} \qquad \qquad \qquad \dfrac{1}{R_{eff}} = \dfrac{1}{R_1} + \dfrac{1}{R_2}
+\]
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection \quad в тангенциальном направлении}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{sily}
+	\caption{Силы возникающие в шарах при контактном взаимодействии.}
+	\label{pic:sily}
+\end{figure} 
+
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection \quad  в тангенциальном направлении}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.8\textwidth]{fs_ms}
+	\caption{Приведение силы трения скольжения к центру элемента}
+	\label{pic:fs_ms}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection \quad в тангенциальном направлении}
+
+
+\begin{align*}
+F_s &= \mu_s \cdot F_n \cdot sign(v_{rel\_tan}) \qquad v_{rel\_tan} \neq 0\\
+M_s &= F_s \cdot R_{eff}\\
+M_r &= \mu_r \cdot F_n \cdot R_{eff} \cdot sign(\omega_{rel}) \qquad \qquad \omega_{rel} \neq 0\\
+v_{rel\_tan}^{1} &= v_{y}^{1} - v_{y}^{2} - \left( \omega_1 \cdot R_1 + \omega_2 \cdot R_2 \right)\\
+\omega_{rel} &= \omega_1 + \omega_2\\
+\end{align*}
+
+\end{frame}
+
+
+\subsection{Силы диссипации}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{dissip}
+\end{figure} 
+
+\begin{align*}
+D_n &= c_n \cdot v_n\\
+D_t &= c_t \cdot v_t\\
+\end{align*}
+
+\begin{align*}
+c_n &= 2 \cdot \sqrt{m \cdot 2 \cdot E_{eff} \cdot \delta_n \sqrt{R_{eff}}} \cdot \zeta_n \\
+c_t &= 4 \cdot \sqrt{m \cdot 2 \cdot G_{eff} \cdot \delta_n \sqrt{R_{eff}}} \cdot \zeta_t
+\end{align*}
+\end{frame}
+
+
+\subsection{Шар-стенка}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{ball_wall}
+\end{figure} 
+\end{frame}
+
+
+\section{Результаты работы}
+
+\subsection{Каскадный режим}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+	\begin{figure}[ht]
+ 		\includemovie[
+ 			poster,
+     		externalviewer,
+     		inline=false,
+     		text={\small Каскадный режим работы шаровой мельницы}]{}{}
+     		{kaskad_result.mp4}
+\end{figure}
+	
+	\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{kaskad_energy}
+	\caption{График изменения энергии во времени при каскадном режиме работы мельницы}
+	\label{pic:kaskad_energy}
+\end{figure} 
+\end{frame}
+
+\subsection{Водопадный режим}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+\begin{figure}[ht]
+ 		\includemovie[
+ 			poster,
+     		externalviewer,
+     		inline=false,
+     		text={\small Водопадный режим работы шаровой мельницы}]{}{}
+     		{vodopad_result.mp4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{vodopad_energy} 
+	\caption{График изменения энергии во времени при водопадном режиме работы мельницы}
+	\label{pic:vodopad_energy}
+\end{figure} 
+
+\end{frame}
+
+
+\subsection{Смешанный режим}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+\begin{figure}[ht]
+ 		\includemovie[
+ 			poster,
+     		externalviewer,
+     		inline=false,
+     		text={\small Смешанный каскадно-водопадный режим работы}]{}{}
+     		{smeshan_result.mp4}
+\end{figure}
+
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{smeshan_energy} 
+	\caption{График изменения энергии во времени при смешанном каскадно-водопадном режиме работы мельницы}
+	\label{pic:smeshan_energy}
+\end{figure} 
+\end{frame}
+
+
+\subsection{С превышением критической частоты}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+\begin{figure}[ht]
+ 		\includemovie[
+ 			poster,
+     		externalviewer,
+     		inline=false,
+     		text={\small Работа шаровой мельницы с превышением критической частоты}]{}{}
+     		{kritic_result.mp4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{kritic_energy} 
+	\caption{График изменения энергии во времени при при превышении критической частоты}
+	\label{pic:kritic_energy}
+\end{figure} 
+\end{frame}
+
+
+
+
+
+
+
+
+ \end{document}

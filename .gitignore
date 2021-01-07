@@ -3,3 +3,10 @@
 *.out
 *.toc
 *.gz
+presentation/*.aux
+presentation/*.log
+presentation/*.out
+presentation/*.toc
+presentation/*.gz
+presentation/*.nav
+presentation/*.snm
