@@ -24,6 +24,8 @@
 \newtheorem{rproof}{Доказательство}
 \newtheorem{rexample}{Пример}
 
+\usepackage{array}
+
 %%% Дополнительная работа с математикой
 \usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
 \usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
@@ -69,10 +71,10 @@
 \usepackage{pgfplotstable}
 
 \title{Кусовая работа}
-\subtitle{Численное моделирование рудоразмольой мельницы методом дискретных элементов}
+\subtitle{Численное моделирование динамики частиц дроби в рудоразмольной мельнице методом дискретных элементов}
 \author{Катнов Артем}
 \date{\today}
-\institute[]{Московский государственный технический университет им. Н.Э.Баумана}
+\institute[Факультет робототехники и комплексной автоматизации]{Московский государственный технический университет им. Н.Э.Баумана}
 
 \usepackage{movie15}
 \usepackage{hyperref}
@@ -99,75 +101,83 @@
 	\includegraphics[width=0.4\textwidth]{sreda}
 	\includegraphics[width=0.4\textwidth]{sreda2}
 	\caption{Демонстрация сыпучей среды}
-
 \end{figure} 
+
+Cundall P. A. A computer model for simulating progressive, large-scale movement in blocky rock system //Proceedings of the International Symposium on Rock Mechanics, 1971. – 1971.
+
 \end{frame}
 
 \begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{\insertsubsection}
+\frametitle{Цель работы} 
+\framesubtitle{Шаровая мельница}
+
+Цель работы: исследование динамики системы частиц дроби во вращающемся барабане рудоразмольной мельницы.
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\textwidth]{algorithm}
-	\caption{Алгоритм метода в общем виде}
+	\includegraphics[width=0.7\textwidth]{baraban_shema}
+	\caption{Схематическое изображение шаровой мельницы}
+\end{figure}
+
+ 
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Алгоритм метода}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.9\textwidth]{algorithm}
+	\includegraphics[width=0.5\textwidth]{local}
 \end{figure} 
 \end{frame}
+
 
 \section{Описание модели}
 
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{Кинематика частиц}
-\begin{align}
-x &= x_0 + v^x_0 \cdot \Delta t + \dfrac{a^x_0 \cdot \Delta t^2}{2} + \dfrac{b^x_0 \cdot \Delta t^3}{6}\\
-y &= y_0 + v^y_0 \cdot \Delta t + \dfrac{a^y_0 \cdot \Delta t^2}{2} + \dfrac{b^y_0 \cdot \Delta t^3}{6}\\
-\vartheta &= \vartheta_0 + v^{\vartheta}_0 \cdot \Delta t + \dfrac{a^{\vartheta}_0 \cdot \Delta t^2}{2} + \dfrac{b^{\vartheta}_0 \cdot \Delta t^3}{6}
-\end{align}
-\end{frame}
-
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{Итерационное уточнение}
-
-\begin{align}
-b_n &= \dfrac{a_{t + \Delta t} - a_{t}}{\Delta t} \label{eq:jerks} \\
-b_t &= \dfrac{a_{t + \Delta t} - a_{t}}{\Delta t} \label{jerk_tangent}\\
-b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t} \label{jerk_angular}
-\end{align}
-
-\end{frame}
-
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{Блок-схема итерационного уточнения}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.3\textwidth]{iter_cicle} 
-	\includegraphics[width=0.3\textwidth]{iter_one}
-	\label{pic:iter}
-\end{figure} 
-
-\end{frame}
+\subsection{Контактные силы}
 
 
-\subsection{Упрощения МДЭ}
+
+
 \begin{frame}
 \frametitle{\insertsection} 
 \framesubtitle{\insertsubsection}
-
+Syed Z., Tekeste M., White D. A coupled sliding and rolling friction model for DEM calibration //Journal of Terramechanics. – 2017. – Т. 72. – С. 9-20.
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\textwidth]{dem-rigid-cluster}
+	\includegraphics[width=0.8\textwidth]{sily}
+	\caption{Контактные силы, возникающие в шарах при взаимодействии}
 \end{figure} 
 \end{frame}
 
-\subsection{Контактные силы}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \begin{frame}
 \frametitle{\insertsection} 
-\framesubtitle{\insertsubsection \quad  в нормальном направлении}
+\framesubtitle{Контактные силы в нормальном направлении}
 
 \begin{wrapfigure}{r}{0.15\textwidth}
 \includegraphics[width=0.15\textwidth]{vhod}
@@ -195,22 +205,61 @@ k_n = \frac{4}{3} \cdot E_{eff} \cdot \sqrt{R_{eff} \cdot \delta_n}
 
 \end{frame}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{frame}
 \frametitle{\insertsection} 
-\framesubtitle{\insertsubsection \quad в тангенциальном направлении}
-
+\framesubtitle{Контактные силы в тангенциальном и окружном направлениях}
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.8\textwidth]{sily}
-	\caption{Силы возникающие в шарах при контактном взаимодействии.}
-	\label{pic:sily}
+	\includegraphics[width=0.55\textwidth]{sily}
 \end{figure} 
-
+\begin{align*}
+F_s &= \mu_s \cdot F_n \cdot sign(v_{rel\_tan}) \qquad v_{rel\_tan} \neq 0\\
+M_s &= F_s \cdot R_{eff}\\
+M_r &= \mu_r \cdot F_n \cdot R_{eff} \cdot sign(\omega_{rel}) \qquad \qquad \omega_{rel} \neq 0\\
+v_{rel\_tan}^{1} &= v_{y}^{1} - v_{y}^{2} - \left( \omega_1 \cdot R_1 + \omega_2 \cdot R_2 \right)\\
+\omega_{rel} &= \omega_1 + \omega_2\\
+\end{align*}
 \end{frame}
+
+
+
+
 
 \begin{frame}
 \frametitle{\insertsection} 
-\framesubtitle{\insertsubsection \quad  в тангенциальном направлении}
+\framesubtitle{Контактные силы скольжения}
 
 \begin{figure}[h!]
 	\centering
@@ -220,20 +269,9 @@ k_n = \frac{4}{3} \cdot E_{eff} \cdot \sqrt{R_{eff} \cdot \delta_n}
 \end{figure} 
 \end{frame}
 
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{\insertsubsection \quad в тангенциальном направлении}
 
 
-\begin{align*}
-F_s &= \mu_s \cdot F_n \cdot sign(v_{rel\_tan}) \qquad v_{rel\_tan} \neq 0\\
-M_s &= F_s \cdot R_{eff}\\
-M_r &= \mu_r \cdot F_n \cdot R_{eff} \cdot sign(\omega_{rel}) \qquad \qquad \omega_{rel} \neq 0\\
-v_{rel\_tan}^{1} &= v_{y}^{1} - v_{y}^{2} - \left( \omega_1 \cdot R_1 + \omega_2 \cdot R_2 \right)\\
-\omega_{rel} &= \omega_1 + \omega_2\\
-\end{align*}
 
-\end{frame}
 
 
 \subsection{Силы диссипации}
@@ -241,38 +279,167 @@ v_{rel\_tan}^{1} &= v_{y}^{1} - v_{y}^{2} - \left( \omega_1 \cdot R_1 + \omega_2
 \begin{frame}
 \frametitle{\insertsection} 
 \framesubtitle{\insertsubsection}
-
-\begin{figure}[h!]
+\begin{wrapfigure}{r}{0.4\textwidth}
 	\centering
-	\includegraphics[width=0.4\textwidth]{dissip}
-\end{figure} 
-
+	\includegraphics[width=0.4\textwidth]{dempfer}
+\end{wrapfigure} 
 \begin{align*}
-D_n &= c_n \cdot v_n\\
-D_t &= c_t \cdot v_t\\
-\end{align*}
-
-\begin{align*}
+D_n &= c_n \cdot v_{n\_rel}\\
+D_t &= c_t \cdot v_{t\_rel}\\
 c_n &= 2 \cdot \sqrt{m \cdot 2 \cdot E_{eff} \cdot \delta_n \sqrt{R_{eff}}} \cdot \zeta_n \\
 c_t &= 4 \cdot \sqrt{m \cdot 2 \cdot G_{eff} \cdot \delta_n \sqrt{R_{eff}}} \cdot \zeta_t
 \end{align*}
+Караваев А. С., Копысов С. П., Сармакеева А. С. Моделирование динамики произвольных тел методом дискретных элементов //Вестник Удмуртского университета. Математика. Механика. Компьютерные науки. – 2015. – Т. 25. – №. 4. – С. 473-482.
 \end{frame}
 
 
-\subsection{Шар-стенка}
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Кинематика частиц}
 
 \begin{frame}
 \frametitle{\insertsection} 
 \framesubtitle{\insertsubsection}
+\begin{align}
+x &= x_0 + v^x_0 \cdot \Delta t + \dfrac{a^x_0 \cdot \Delta t^2}{2} + \dfrac{b^x_0 \cdot \Delta t^3}{6}\\
+y &= y_0 + v^y_0 \cdot \Delta t + \dfrac{a^y_0 \cdot \Delta t^2}{2} + \dfrac{b^y_0 \cdot \Delta t^3}{6}\\
+\vartheta &= \vartheta_0 + v^{\vartheta}_0 \cdot \Delta t + \dfrac{a^{\vartheta}_0 \cdot \Delta t^2}{2} + \dfrac{b^{\vartheta}_0 \cdot \Delta t^3}{6}
+\end{align}
+\begin{align}
+b_n &= \dfrac{a_{t + \Delta t} - a_{t}}{\Delta t} \\
+b_t &= \dfrac{a_{t + \Delta t} - a_{t}}{\Delta t} \\
+b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t} 
+\end{align}
 
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.5\textwidth]{ball_wall}
-\end{figure} 
+\[
+\left\lbrace b \right\rbrace^{glob} = [T] \cdot \left\lbrace b \right\rbrace^{loc}
+\]
 \end{frame}
 
 
+
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Блок-схема итерационного уточнения}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.2\textwidth]{kriter_big}
+	\includegraphics[width=0.3\textwidth]{iter_cicle} 
+	\includegraphics[width=0.3\textwidth]{iter_one}
+	\label{pic:iter}
+\end{figure} 
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Совокупность уравнений}
+\[
+\left\lbrace
+\begin{aligned}
+\overline{m \cdot a_t} &= \overline{F_n} + \overline{F_s} + \overline{D} + \overline{G}\\
+\overline{I \cdot \varepsilon_t} &= \overline{M_s} + \overline{M_r}\\
+\overline{a}_{t + \Delta t} &= \overline{a}_t + \overline{b}_t \cdot \Delta t \\
+\overline{v}_{t + \Delta t} &= \overline{v}_t + \overline{a}_t \cdot \Delta t + \dfrac{\overline{b}_t \cdot \Delta t^2}{2} \\
+\overline{s}_{t + \Delta t} &= \overline{s}_t + \overline{v}_t \cdot \Delta t + \dfrac{\overline{a}_t \cdot \Delta t^2}{2} +  \dfrac{\overline{b}_t \cdot \Delta t^3}{6}\\
+&\cdots\\
+\vartheta_{t + \Delta t} &= \vartheta_t + v^{\vartheta}_t \cdot \Delta t + \dfrac{a^{\vartheta}_t \cdot \Delta t^2}{2} + \dfrac{b^{\vartheta}_t \cdot \Delta t^3}{6} 
+\end{aligned}
+\right.
+\]
+
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Результаты работы}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Постановка задачи}
+
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Модуль продольной упругости & 2$\times 10^{11}$ Па  \\ 
+\hline
+Модуль сдвига & 8$\times 10^{10}$ Па \\  
+\hline
+Плотность материала & 7800 кг/м$^3$ \\
+\hline
+К-т диссипации в норм-ом направлении & 0.1 \\
+\hline
+К-т диссипации в танген-ом направлении & 0.1 \\
+\hline
+К-т трения скольжения & 0.1 \\
+\hline
+К-т трения качения & 0.05 \\
+\hline
+Радиус шаровой мельницы & 2.5 м \\
+\hline
+Радиус шаров & 0.1 м \\
+\hline
+Количество шаров & 120 \\
+\hline
+Процент заполненности мельницы & 21 \% \\
+\hline
+Шаг по времени & 10$^{-5}$ сек \\
+\hline
+\end{tabular}
+\end{center}
+
+\end{frame}
 
 \subsection{Каскадный режим}
 
@@ -284,41 +451,33 @@ c_t &= 4 \cdot \sqrt{m \cdot 2 \cdot G_{eff} \cdot \delta_n \sqrt{R_{eff}}} \cdo
  			poster,
      		externalviewer,
      		inline=false,
-     		text={\small Каскадный режим работы шаровой мельницы}]{}{}
+     		text={\small Каскадный режим работы шаровой мельницы (2 об/мин)}]{}{}
      		{kaskad_result.mp4}
 \end{figure}
-	
+	\alt<2> {
 	\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{kaskad_energy}
 	\caption{График изменения энергии во времени при каскадном режиме работы мельницы}
 	\label{pic:kaskad_energy}
 \end{figure} 
-\end{frame}
-
-\subsection{Водопадный режим}
-
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{\insertsubsection}
-
-\begin{figure}[ht]
- 		\includemovie[
- 			poster,
-     		externalviewer,
-     		inline=false,
-     		text={\small Водопадный режим работы шаровой мельницы}]{}{}
-     		{vodopad_result.mp4}
-\end{figure}
-
+}
+{
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.5\textwidth]{vodopad_energy} 
-	\caption{График изменения энергии во времени при водопадном режиме работы мельницы}
-	\label{pic:vodopad_energy}
-\end{figure} 
-
+	\includegraphics[width=0.5\textwidth]{kaskad_theory} 
+	\caption{Теоретическая картина каскадного режима}
+\end{figure}
+}
 \end{frame}
+
+
+
+
+
+
+
+
 
 
 \subsection{Смешанный режим}
@@ -332,18 +491,69 @@ c_t &= 4 \cdot \sqrt{m \cdot 2 \cdot G_{eff} \cdot \delta_n \sqrt{R_{eff}}} \cdo
  			poster,
      		externalviewer,
      		inline=false,
-     		text={\small Смешанный каскадно-водопадный режим работы}]{}{}
+     		text={\small Смешанный каскадно-водопадный режим работы (14 об/мин)}]{}{}
      		{smeshan_result.mp4}
 \end{figure}
 
-
+\alt<2> {
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{smeshan_energy} 
 	\caption{График изменения энергии во времени при смешанном каскадно-водопадном режиме работы мельницы}
 	\label{pic:smeshan_energy}
 \end{figure} 
+}
+{
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{smeshan_theory} 
+	\caption{Теоретическая картина смешанного режима}
+\end{figure}
+}
 \end{frame}
+
+
+
+
+
+\subsection{Водопадный режим}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+\begin{figure}[ht]
+ 		\includemovie[
+ 			poster,
+     		externalviewer,
+     		inline=false,
+     		text={\small Водопадный режим работы шаровой мельницы (17 об/мин)}]{}{}
+     		{vodopad_result.mp4}
+\end{figure}
+\alt<2> {
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{vodopad_energy} 
+	\caption{График изменения энергии во времени при водопадном режиме работы мельницы}
+	\label{pic:vodopad_energy}
+\end{figure} 
+}
+{
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{vodopad_theory} 
+	\caption{Теоретическая картина водопадного режима}
+\end{figure}
+}
+
+\end{frame}
+
+
+
+
+
+
+
 
 
 \subsection{С превышением критической частоты}
@@ -356,21 +566,53 @@ c_t &= 4 \cdot \sqrt{m \cdot 2 \cdot G_{eff} \cdot \delta_n \sqrt{R_{eff}}} \cdo
  			poster,
      		externalviewer,
      		inline=false,
-     		text={\small Работа шаровой мельницы с превышением критической частоты}]{}{}
+     		text={\small Превышение критической частоты (33 об/мин)}]{}{}
      		{kritic_result.mp4}
 \end{figure}
-
+\alt<2> {
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.5\textwidth]{kritic_energy} 
-	\caption{График изменения энергии во времени при при превышении критической частоты}
-	\label{pic:kritic_energy}
+	\caption{График изменения энергии во времени при превышении критической частоты}
+\end{figure}
+}
+{
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{kritic_theory} 
+	\caption{Теоретическая картина закритического режима}
+\end{figure}
+}
+\end{frame}
+
+
+\begin{frame}
+\centering
+Спасибо за внимание!
+\end{frame}
+
+\section{Доп. материалы}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Шар-стенка}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{ball_wall}
 \end{figure} 
 \end{frame}
 
 
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Упрощения МДЭ}
 
-
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{dem-rigid-cluster}
+\end{figure} 
+\end{frame}
 
 
 
