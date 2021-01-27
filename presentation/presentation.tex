@@ -363,19 +363,34 @@ b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t}
 \begin{frame}
 \frametitle{\insertsection} 
 \framesubtitle{Совокупность уравнений}
+\alt<2> {
+\[
+\left\lbrace
+\begin{aligned}
+\overline{m \cdot a_t} &= \overline{G}\\
+\overline{I \cdot \varepsilon_t} &= 0\\
+\overline{v}_{t} &= \overline{v}_{t - \Delta t} + \overline{a}_t \cdot \Delta t \\
+\overline{s}_{t} &= \overline{s}_{t - \Delta t} + \overline{v}_{t - \Delta t} \cdot \Delta t + \dfrac{\overline{a}_t \cdot \Delta t^2}{2} \\
+v_{t}^{\vartheta} &= v^{\vartheta}_{t - \Delta t}  \\
+\vartheta_{t} &= \vartheta_{t - \Delta t} + v^{\vartheta}_{t - \Delta t} \cdot \Delta t
+\end{aligned}
+\right.
+\]
+} 
+{
 \[
 \left\lbrace
 \begin{aligned}
 \overline{m \cdot a_t} &= \overline{F_n} + \overline{F_s} + \overline{D} + \overline{G}\\
 \overline{I \cdot \varepsilon_t} &= \overline{M_s} + \overline{M_r}\\
-\overline{a}_{t + \Delta t} &= \overline{a}_t + \overline{b}_t \cdot \Delta t \\
-\overline{v}_{t + \Delta t} &= \overline{v}_t + \overline{a}_t \cdot \Delta t + \dfrac{\overline{b}_t \cdot \Delta t^2}{2} \\
-\overline{s}_{t + \Delta t} &= \overline{s}_t + \overline{v}_t \cdot \Delta t + \dfrac{\overline{a}_t \cdot \Delta t^2}{2} +  \dfrac{\overline{b}_t \cdot \Delta t^3}{6}\\
-&\cdots\\
-\vartheta_{t + \Delta t} &= \vartheta_t + v^{\vartheta}_t \cdot \Delta t + \dfrac{a^{\vartheta}_t \cdot \Delta t^2}{2} + \dfrac{b^{\vartheta}_t \cdot \Delta t^3}{6} 
+\overline{v}_{t} &= \overline{v}_{t - \Delta t} + \overline{a}_t \cdot \Delta t + \dfrac{\overline{b}_t \cdot \Delta t^2}{2} \\
+\overline{s}_{t} &= \overline{s}_{t - \Delta t} + \overline{v}_{t - \Delta t} \cdot \Delta t + \dfrac{\overline{a}_t \cdot \Delta t^2}{2} +  \dfrac{\overline{b}_t \cdot \Delta t^3}{6}\\
+v_{t}^{\vartheta} &= v^{\vartheta}_{t - \Delta t} + \varepsilon_t \cdot \Delta t\\
+\vartheta_{t} &= \vartheta_{t - \Delta t} + v^{\vartheta}_{t - \Delta t} \cdot \Delta t + \dfrac{\varepsilon_t \cdot \Delta t^2}{2} + \dfrac{b^{\vartheta}_t \cdot \Delta t^3}{6} 
 \end{aligned}
 \right.
 \]
+}
 
 
 \end{frame}
@@ -566,7 +581,7 @@ b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t}
  			poster,
      		externalviewer,
      		inline=false,
-     		text={\small Превышение критической частоты (33 об/мин)}]{}{}
+     		text={\small Превышение критической частоты (30 об/мин)}]{}{}
      		{kritic_result.mp4}
 \end{figure}
 \alt<2> {
