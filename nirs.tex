@@ -7,6 +7,14 @@
 \usepackage[utf8]{inputenc}			% кодировка исходного текста
 \usepackage[english,russian]{babel}	% локализация и переносы
 
+%\usepackage{fontspec} % XeTeX
+% Шрифты, xelatex
+%\defaultfontfeatures{Ligatures=TeX}
+%\setmainfont{Times New Roman} % Нормоконтроллеры хотят именно его
+%\newfontfamily\cyrillicfont{Times New Roman}
+%\setsansfont{Liberation Sans} % Тут я его не использую, но если пригодится
+%\setmonofont{FreeMono} % Моноширинный шрифт для оформления кода
+
 %%% Дополнительная работа с математикой
 \usepackage{amsfonts,amssymb,amsthm,mathtools} % AMS
 \usepackage{amsmath}
@@ -65,9 +73,10 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 % цвета для гиперссылок
-%\definecolor{linkcolor}{HTML}{000000} % цвет ссылок
-%\definecolor{urlcolor}{HTML}{000000} % цвет гиперссылок
-%\hypersetup{linkcolor=linkcolor, urlcolor=urlcolor, colorlinks=true}
+\definecolor{linkcolor}{HTML}{000000} % цвет ссылок
+\definecolor{urlcolor}{HTML}{000000} % цвет гиперссылок
+\definecolor{citecolor}{HTML}{000000} % цвет ссылок на литературу
+\hypersetup{linkcolor=linkcolor, urlcolor=urlcolor, citecolor=citecolor, colorlinks=true}
 
 \usepackage{cleveref}
 %\usepackage{underscore}
@@ -79,6 +88,38 @@
 %\usepackage{mfirstuc}
 %\usepackage{nomencl}
 %\usepackage{iftex}
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\hspace{0.38\textwidth} \bfseries\MakeUppercase}
+%\renewcommand{\cftbeforetoctitleskip}{-1em}
+%\renewcommand{\cftaftertoctitle}{\mbox{}\hfill \\ \mbox{}\hfill{\footnotesize Стр.}\vspace{-2.5em}}
+%\renewcommand{\cftchapfont}{\normalsize\bfseries \MakeUppercase{\chaptername} }
+\renewcommand{\cftsecfont}{\hspace{0pt}}
+\renewcommand{\cftsubsecfont}{\hspace{-20pt}}
+%\renewcommand{\cftbeforechapskip}{1em}
+%\renewcommand{\cftparskip}{-1mm}
+\renewcommand{\cftdotsep}{1}
+\renewcommand\cftsecleader{\cftdotfill{\cftdotsep}} % Точки для секций в содержании
+\setcounter{tocdepth}{2} % задать глубину оглавления — до subsection включительно
+
+\newcommand{\empline}{\mbox{}}
+\newcommand{\likechapterheading}[1]{ 
+    \begin{center}
+    \textbf{\MakeUppercase{#1}}
+    \end{center}}
+    
+\makeatletter
+    \renewcommand{\@dotsep}{1}
+    \newcommand{\l@likechapter}[2]{{\@dottedtocline{0}{0pt}{0pt}{#1}{#2}}}
+\makeatother
+\newcommand{\likechapter}[1]{    
+    \likechapterheading{#1}    
+    \addcontentsline{toc}{likechapter}{#1}}
+    
+    
+\usepackage[square,numbers,sort&compress]{natbib}
+\renewcommand{\bibnumfmt}[1]{#1.\hfill} % нумерация источников в самом списке — через точку
+\renewcommand{\bibsection}{\likechapter{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}} % заголовок специального раздела
+\setlength{\bibsep}{0pt}
 
 \begin{document}
 \def\contentsname{СОДЕРЖАНИЕ}
@@ -86,8 +127,7 @@
 \tableofcontents
 \newpage
 
-\section*{ВВЕДЕНИЕ}
-\addcontentsline{toc}{section}{ВВЕДЕНИЕ}
+\likechapter{ВВЕДЕНИЕ}
 
 \subsection*{Введение в метод дискретных элементов}
 
@@ -650,7 +690,7 @@ P = 1 - e^{-S \cdot E_t}
 Проверялись корректность направления возникающих сил, моментов и скоростей при различных ситуациях (два шара с нулевой линейной скоростью и ненулевой угловой контактируют, два шара с нулевой угловой скоростью и ненулевой линейной контактируют и пр.) (рисунок \ref{pic:test_primer})
 Каждый из этих тестов был пройден.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.4\textwidth]{test_primer} 
 	\caption{Пример теста: известны скорости шаров: можем проанализировать направления сил и угловой скорости}
@@ -659,8 +699,7 @@ P = 1 - e^{-S \cdot E_t}
 
 \newpage
 
-\section*{ЗАКЛЮЧЕНИЕ}
-\addcontentsline{toc}{section}{ЗАКЛЮЧЕНИЕ}
+\likechapter{ЗАКЛЮЧЕНИЕ}
 
 В представленной работе изучен метод дискретных элементов, а также была разработана математическая модель динамики частиц дроби в шаровой рудоразмольной мельнице.
 В качестве примера применимости и работоспособности данной математической модели представлено сравнение с изученной моделью шаровой мельницы.
@@ -668,9 +707,7 @@ P = 1 - e^{-S \cdot E_t}
 
 \newpage
 
-\renewcommand{\refname}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}
 \begin{thebibliography}{99}
-\addcontentsline{toc}{section}{\refname}
 \bibitem{cundall} Cundall P. A., Strack O. D. L. A discrete numerical model for granular assemblies //geotechnique. – 1979. – Т. 29. – №. 1. – С. 47-65.
 \bibitem{friction_calibration} Syed Z., Tekeste M., White D. A coupled sliding and rolling friction model for DEM calibration //Journal of Terramechanics. – 2017. – Т. 72. – С. 9-20.
 \bibitem{aglomerath} Караваев А. С., Копысов С. П., Сармакеева А. С. Моделирование динамики произвольных тел методом дискретных элементов //Вестник Удмуртского университета. Математика. Механика. Компьютерные науки. – 2015. – Т. 25. – №. 4. – С. 473-482.
