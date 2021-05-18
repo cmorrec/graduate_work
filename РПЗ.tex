@@ -153,10 +153,6 @@
 \usepackage{lastpage} % Для подсчета числа страниц
 
 
-
-
-
-
 \usepackage[square,numbers,sort&compress]{natbib}
 \renewcommand{\bibnumfmt}[1]{#1.\hfill} % нумерация источников в самом списке — через точку
 \renewcommand{\bibsection}{\section*{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}} % заголовок специального раздела
@@ -166,13 +162,104 @@
 
 
 
-
-
-
-
-
 % ---------------------- Документ ----------------------
 \begin{document}
+	\begin{titlepage}
+		\noindent\begin{minipage}{0.05\textwidth}
+			\includegraphics[scale=0.3]{1.png}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.85\textwidth}\raggedleft
+			\begin{center}
+				\fontsize{12pt}{0.3\baselineskip}\selectfont \textbf{Министерство науки и высшего образования Российской Федерации \\ Федеральное государственное бюджетное образовательное учреждение \\ высшего образования \\ <<Московский государственный технический университет \\ имени Н.Э. Баумана \\ (национальный исследовательский университет)>> \\ (МГТУ им. Н.Э. Баумана)}
+			\end{center}
+		\end{minipage}
+
+		\begin{center}
+			\fontsize{12pt}{0.1\baselineskip}\selectfont
+			\noindent\makebox[\linewidth]{\rule{\textwidth}{4pt}} \makebox[\linewidth]{\rule{\textwidth}{1pt}}
+		\end{center}
+
+		\begin{flushleft}
+			\fontsize{12pt}{0.8\baselineskip}\selectfont 
+			
+			ФАКУЛЬТЕТ \uline{<<\textbf{<Факультет (полностью)>}>> \hfill}
+
+			КАФЕДРА \uline{\hspace{4mm} <<\textbf{<Кафедра (полностью)>}>> \hfill}
+		\end{flushleft}
+
+		\vfill
+
+		\begin{center}
+			\fontsize{20pt}{\baselineskip}\selectfont
+
+			\textbf{РАСЧЕТНО-ПОЯСНИТЕЛЬНАЯ ЗАПИСКА}
+
+			\textbf{\textit{К ВЫПУСКНОЙ КВАЛИФИКАЦИОННОЙ РАБОТЕ}}
+
+			\textbf{\textit{НА ТЕМУ:}}
+		\end{center}
+
+		\begin{center}
+			\fontsize{18pt}{0.6cm}\selectfont 
+			
+			\uline{\hfill}
+	
+			\uline{\hfill}
+	
+			\uline{\hfill}
+	
+			\uline{\hfill}
+	
+			\uline{\hfill}
+		\end{center}
+
+		\vfill
+
+		\begin{table}[h!]
+			\fontsize{12pt}{0.7\baselineskip}\selectfont
+			\centering
+			\begin{signstabular}[0.7]{p{7.25cm} >{\centering\arraybackslash}p{4cm} >{\centering\arraybackslash}p{4cm}}
+				Студент группы \textbf{<Группа (Шифр)>} & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{<И.О. Фамилия>} \hfill} \\
+				& \scriptsize (Подпись, дата) & \scriptsize (И.О. Фамилия)
+			\end{signstabular}
+
+			\vspace{\baselineskip}
+
+			\begin{signstabular}[0.7]{p{7.25cm} >{\centering\arraybackslash}p{4cm} >{\centering\arraybackslash}p{4cm}}
+				Руководитель ВКР & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{<И.О. Фамилия>} \hfill} \\
+				& \scriptsize (Подпись, дата) & \scriptsize (И.О. Фамилия)
+			\end{signstabular}
+
+			\vspace{\baselineskip}
+
+			\begin{signstabular}[0.7]{p{7.25cm} >{\centering\arraybackslash}p{4cm} >{\centering\arraybackslash}p{4cm}}
+				Нормоконтроллер & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{<И.О. Фамилия>} \hfill} \\
+				& \scriptsize (Подпись, дата) & \scriptsize (И.О. Фамилия)
+			\end{signstabular}
+		\end{table}
+
+		\vfill
+
+		\begin{center}
+			\normalsize \textit{\textbf{<Год>} г.}
+		\end{center}
+	\end{titlepage}
+
+	\normalsize
+	\setcounter{page}{4}
+	\section*{АННОТАЦИЯ}
+
+	\pagebreak
+
+	\section*{РЕФЕРАТ}
+		\begin{center}
+			Расчетно-пояснительная записка \pageref{LastPage} с., \totalfigures\ рис., \totaltables\ табл., Х ист., Х прил.
+
+			\textbf{<Ключевые слова>}
+		\end{center}
+
+		\pagebreak
 
 	% Переопределяем название \toc и выводим сам \toc
 	\renewcommand{\contentsname}{\normalsize\bfseries\centering СОДЕРЖАНИЕ}
@@ -704,40 +791,22 @@ b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t} 
 \[
 E_t = E_{cum} + E - E_{min}
 \]
-где $E_{cum}$ — накопленная энергия предыдущих контактов, $Е$ — текущая энергия контакта, которая определяется в формуле \ref{eq:pot_energy} и появляется только в следствие упругого взаимодействия частиц.
-\[
-E = \frac{k \cdot \delta^2}{2}
-\]
+где $E_{сum}$ — накопленная энергия предыдущих контактов, $Е$ — текущая энергия контакта, которая определяется в формуле \ref{eq:pot_energy}.
 
 Вероятность разрушения частиц рассчитывается по формуле
 \[
 P = 1 - e^{-S \cdot E_t} 
 \]
-где $S$ — параметр прочности, характеризующий разрушение частиц. Данная формула является эмпирической, коэффициенты подбираются для каждого типа руды по отдельности на основе экспериментальных данных о разрушении.
-
+где $S$ — параметр прочности, характеризующий разрушение частиц
 
 Если частица разрушена, то ее фрагменты (тоже формы шара) генерируются исходя из равенства массы и равенства кинетической энергии. 
-Т.к. в данной работе рассматривается работа в двухмерном пространстве, то сохранение массы шара, хоть и сопровождается сохранением площади в трехмерном пространстве, в нашей постановке вызовет "проблему наложения". 
-Будет происходить зрительное увеличение занимаемой площади шаров.
-Например, образуется две новых частицы.
-Тогда исходя из равенства мссс новый радиус расчитывается как
-\[
-R_{old}^3 = 2 \cdot R^3_{new} \qquad \rightarrow \qquad R_{new} =\frac{R_{old}}{\sqrt[3]{2}}
-\]
-Но когда частицы будут отрисовываться, то они будут занимать больше места.
-\[
-S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad \qquad S_{new} = 2 \cdot \frac{\pi \cdot R_{new}^2}{2} = \sqrt[3]{2} \cdot \frac{\pi \cdot R_{old}^2}{2} = \sqrt[3]{2} \cdot S_{old}
-\]
-При увеличении количества частиц $S_{new}$ будет стремиться к $S_{old}$.
-
+Т.к. в данной работе рассматривается работа в двухмерном пространстве, то сохранение массы шара будет приводить к закономерному зрительному увеличению занимаемой площади шаров.
 В данной реализации для решения вопроса пространства шарам будет разрешено пересекаться с другими без воздействия сил друг на друга, если в первый момент своего появления они уже с кем-то перескаются.
-Иначе частицы в самый первый момент будут сильно накладываться друг на друга и между ними будут образовываться слишком большие силы отталкивания, чего быть не должно.
-После потери первичного контакта все частицы начинают полноценно взаимодействовать друг с другом.
 Это не повлияет качественно на работу программы. 
 Принципиально режим работы от этого не поменяется.
 А насчет количественного изменения не стоит беспокоиться, потому что задачи МДЭ всегда довольно сильно зависят он начальных условий.
 
-При разломе шара, количество сгенерированных частиц образуется исходя из нормального распределения с мат. ожиданием $3\sigma$ и медианой 4, таким образом чтобы 99.7\% величин лежало между двумя и шестью частицами.
+
 
 
 
@@ -778,12 +847,11 @@ S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad \qquad S_{new} = 2 \cdot \frac{\p
 		\addcontentsline{toc}{section}{ЗАКЛЮЧЕНИЕ}
 
 В представленной работе изучен метод дискретных элементов, а также была разработана математическая модель динамики частиц дроби в шаровой рудоразмольной мельнице.
-В качестве примера применимости и работоспособности данной математической модели планируется сравнение с изученной моделью шаровой мельницы.
+В качестве примера применимости и работоспособности данной математической модели представлено сравнение с изученной моделью шаровой мельницы.
 Разработанная модель позволяет исследовать режимы работы рудоразмольной мельницы.
 
 		\pagebreak
 
-		
 \begin{thebibliography}{99}
 \addcontentsline{toc}{section}{СПИСОК ИСПОЛЬЗОВАННЫХ ИСТОЧНИКОВ}
 \bibitem{cundall} Cundall P. A., Strack O. D. L. A discrete numerical model for granular assemblies //geotechnique. – 1979. – Т. 29. – №. 1. – С. 47-65.
