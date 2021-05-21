@@ -69,9 +69,13 @@
 \usepackage{tikz} % Работа с графикой
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
+\usepackage{epstopdf}
+
+\epstopdfDeclareGraphicsRule{.gif}{png}{.png}{convert gif:#1 png:\OutputFile}
+\AppendGraphicsExtensions{.gif}
 
 \title{Научно-исследоват. работа}
-\subtitle{Численное моделирование динамики частиц дроби в рудоразмольной мельнице методом дискретных элементов}
+\subtitle{Численное моделирование динамики частиц в рудоразмольной мельнице методом дискретных элементов}
 \author{Катнов Артем}
 \date{\today}
 \institute[Факультет робототехники и комплексной автоматизации]{Московский государственный технический университет им. Н.Э.Баумана}
@@ -123,13 +127,13 @@ Cundall P. A. A computer model for simulating progressive, large-scale movement 
 \end{frame}
 
 
-
+\subsection{Алгоритм метода}
 
 
 
 \begin{frame}
 \frametitle{\insertsection} 
-\framesubtitle{Алгоритм метода}
+\framesubtitle{\insertsubsection}
 
 \begin{figure}[h!]
 	\centering
@@ -140,15 +144,31 @@ Cundall P. A. A computer model for simulating progressive, large-scale movement 
 
 \begin{frame}
 \frametitle{\insertsection} 
-\framesubtitle{Алгоритм метода}
+\framesubtitle{\insertsubsection}
 
 \begin{figure}[h!]
 	\centering
 	\vspace*{-2cm}
-	\includegraphics[width=0.4\textheight]{local}
-	\includegraphics[width=0.2\textheight]{ball_simple}
+	\includegraphics[width=0.5\textheight]{local}
+	\includegraphics[width=0.3\textheight]{ball_simple}
 	\includegraphics[width=0.4\textheight]{ball_wall}
+	\caption{Три возможных состояния шара}
 \end{figure} 
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+
+1) Определение контактов
+
+2) Расчет контактных сил
+
+3) Определения кинематического закона
+
+4) Определение нового положения шаров
+
+5) Переход на п.1
 \end{frame}
 
 
@@ -450,19 +470,29 @@ S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot
 \end{frame}
 
 
+\section{Постановка задачи}
+
 
 \begin{frame}
+\frametitle{\insertsection}
+\framesubtitle{Рудоразмольная мельница}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\textwidth]{mill_end} 
-	\caption{Схематическое изображеие шаровой мельницы}
+	\includegraphics[width=0.7\textwidth]{mill_nice} 
+	%\includegraphics[width=0.4\textwidth]{mill_gif.gif} 
+	%\includemovie{5cm}{5cm}{pictures/mill_gif.gif}
+	\caption{Схематическое изображение шаровой мельницы}
 	\label{pic:mill_end}
 \end{figure} 
 
 \end{frame}
 
 
+\subsection{Реальные параметры}
+
 \begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
 
 \begin{table}[H]
 \caption{Реальные значения параметров}
@@ -480,23 +510,11 @@ S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot
 \hline
 Плотность руды & 4800 кг/м$^3$ \\
 \hline
-Минимальная энергия разрушения руды & 0.1 Дж \\
-\hline
-Параметр прочности & 1 1/Дж \\
-\hline
 Размеры сито по ширине & 1 м \\
 \hline
 Размеры сито по ширине & 1 м \\
 \hline
 Пропускная способность сито & 0.04 м \\
-\hline
-К-т диссипации в норм-ом направлении & 0.1 \\
-\hline
-К-т диссипации в танген-ом направлении & 0.1 \\
-\hline
-К-т трения скольжения & 0.1 \\
-\hline
-К-т трения качения & 0.05 \\
 \hline
 Радиус шаровой мельницы & 2.5 м \\
 \hline
@@ -506,14 +524,38 @@ S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot
 \hline
 Процент заполненности мельницы & 21 \% \\
 \hline
-Шаг по времени & 10$^{-5}$ сек \\
-\hline
 \end{tabular}
 \end{table}
 \end{frame}
 
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
 
+\begin{table}[H]
+\caption{Реальные значения параметров(продолжение)}
+\begin{tabular}{|c|c|}
 
+\hline
+Шаг по времени & 10$^{-5}$ сек \\
+\hline
+Период добавления руды & 1 сек \\
+\hline
+К-т диссипации в норм-ом направлении & 0.1 \\
+\hline
+К-т диссипации в танген-ом направлении & 0.1 \\
+\hline
+К-т трения скольжения & 0.1 \\
+\hline
+К-т трения качения & 0.05 \\
+\hline
+Минимальная энергия разрушения руды & 0.1 Дж \\
+\hline
+Параметр прочности & 1 1/Дж \\
+\hline
+\end{tabular}
+\end{table}
+\end{frame}
 
 
 
@@ -560,7 +602,14 @@ S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot
 \end{figure} 
 \end{frame}
 
+\begin{frame}
 
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.25\textwidth]{break_before}
+	\includegraphics[width=0.25\textwidth]{break_after}
+\end{figure} 
+\end{frame}
 
 
  \end{document}
