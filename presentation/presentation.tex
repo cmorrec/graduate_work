@@ -70,7 +70,7 @@
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
 
-\title{Кусовая работа}
+\title{Научно-исследоват. работа}
 \subtitle{Численное моделирование динамики частиц дроби в рудоразмольной мельнице методом дискретных элементов}
 \author{Катнов Артем}
 \date{\today}
@@ -111,7 +111,7 @@ Cundall P. A. A computer model for simulating progressive, large-scale movement 
 \frametitle{Цель работы} 
 \framesubtitle{Шаровая мельница}
 
-Цель работы: исследование динамики системы частиц дроби во вращающемся барабане рудоразмольной мельницы.
+Цель работы: исследование динамики системы частиц дробии руды во вращающемся барабане рудоразмольной мельницы.
 
 \begin{figure}[h!]
 	\centering
@@ -134,7 +134,20 @@ Cundall P. A. A computer model for simulating progressive, large-scale movement 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\textwidth]{algorithm}
-	\includegraphics[width=0.5\textwidth]{local}
+	\caption{Общий алгоритм метода дискретных элементов}
+\end{figure} 
+\end{frame}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{Алгоритм метода}
+
+\begin{figure}[h!]
+	\centering
+	\vspace*{-2cm}
+	\includegraphics[width=0.4\textheight]{local}
+	\includegraphics[width=0.2\textheight]{ball_simple}
+	\includegraphics[width=0.4\textheight]{ball_wall}
 \end{figure} 
 \end{frame}
 
@@ -327,14 +340,6 @@ b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t}
 \end{frame}
 
 
-
-
-
-
-
-
-
-
 \begin{frame}
 \frametitle{\insertsection} 
 \framesubtitle{Блок-схема итерационного уточнения}
@@ -397,41 +402,93 @@ v_{t}^{\vartheta} &= v^{\vartheta}_{t - \Delta t} + \varepsilon_t \cdot \Delta t
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Результаты работы}
+\subsection{Модель разрушения}
 
 \begin{frame}
 \frametitle{\insertsection} 
-\framesubtitle{Постановка задачи}
+\framesubtitle{\insertsubsection}
+\begin{equation}
+E_t = E_{t-\Delta t} + E - E_{min}
+\end{equation}
+\begin{equation}
+E = \frac{k \cdot \delta^2}{2}
+\end{equation}
+\begin{equation}
+P = 1 - e^{-S \cdot E_t} 
+\end{equation}
+Белоглазов И. И., Иконников Д. А. Применение метода дискретных элементов для моделирования процесса измельчения горных пород в щековой дробилке //Известия высших учебных заведений. Приборостроение. – 2016. – Т. 59. – №. 9.
+\end{frame}
 
-\begin{center}
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+\begin{equation*}
+R_{old}^3 = 2 \cdot R^3_{new} \qquad \rightarrow \qquad R_{new} =\frac{R_{old}}{\sqrt[3]{2}}
+\end{equation*}
+\begin{equation*}
+S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot R_{new}^2}{2} = \sqrt[3]{2} \cdot \frac{\pi \cdot R_{old}^2}{2} = \sqrt[3]{2} \cdot S_{old}
+\end{equation*}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{1_balls}
+	\includegraphics[width=0.4\textwidth]{2_balls}
+	\caption{Демонстрация положения разрушенных частиц}
+\end{figure} 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{\insertsection} 
+\framesubtitle{\insertsubsection}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{3_balls}
+	\includegraphics[width=0.4\textwidth]{4_balls}
+	\caption{Демонстрация положения разрушенных частиц}
+\end{figure} 
+\end{frame}
+
+
+
+\begin{frame}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth]{mill_end} 
+	\caption{Схематическое изображеие шаровой мельницы}
+	\label{pic:mill_end}
+\end{figure} 
+
+\end{frame}
+
+
+\begin{frame}
+
+\begin{table}[H]
+\caption{Реальные значения параметров}
 \begin{tabular}{|c|c|}
 \hline
-Модуль продольной упругости & 2$\times 10^{11}$ Па  \\ 
+Модуль продольной упругости дроби & 2$\times 10^{11}$ Па  \\ 
 \hline
-Модуль сдвига & 8$\times 10^{10}$ Па \\  
+Модуль сдвига дроби & 8$\times 10^{10}$ Па \\  
 \hline
-Плотность материала & 7800 кг/м$^3$ \\
+Плотность дроби & 7800 кг/м$^3$ \\
+\hline
+Модуль продольной упругости руды & 6$\times 10^{10}$ Па  \\ 
+\hline
+Модуль сдвига руды & 2.4$\times 10^{10}$ Па \\  
+\hline
+Плотность руды & 4800 кг/м$^3$ \\
+\hline
+Минимальная энергия разрушения руды & 0.1 Дж \\
+\hline
+Параметр прочности & 1 1/Дж \\
+\hline
+Размеры сито по ширине & 1 м \\
+\hline
+Размеры сито по ширине & 1 м \\
+\hline
+Пропускная способность сито & 0.04 м \\
 \hline
 К-т диссипации в норм-ом направлении & 0.1 \\
 \hline
@@ -443,7 +500,7 @@ v_{t}^{\vartheta} &= v^{\vartheta}_{t - \Delta t} + \varepsilon_t \cdot \Delta t
 \hline
 Радиус шаровой мельницы & 2.5 м \\
 \hline
-Радиус шаров & 0.1 м \\
+Изначальный радиус шаров & 0.1 м \\
 \hline
 Количество шаров & 120 \\
 \hline
@@ -452,38 +509,7 @@ v_{t}^{\vartheta} &= v^{\vartheta}_{t - \Delta t} + \varepsilon_t \cdot \Delta t
 Шаг по времени & 10$^{-5}$ сек \\
 \hline
 \end{tabular}
-\end{center}
-
-\end{frame}
-
-\subsection{Каскадный режим}
-
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{\insertsubsection}
-	\begin{figure}[ht]
- 		\includemovie[
- 			poster,
-     		externalviewer,
-     		inline=false,
-     		text={\small Каскадный режим работы шаровой мельницы (2 об/мин)}]{}{}
-     		{kaskad_result.mp4}
-\end{figure}
-	\alt<2> {
-	\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{kaskad_energy}
-	\caption{График изменения энергии во времени при каскадном режиме работы мельницы}
-	\label{pic:kaskad_energy}
-\end{figure} 
-}
-{
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{kaskad_theory} 
-	\caption{Теоретическая картина каскадного режима}
-\end{figure}
-}
+\end{table}
 \end{frame}
 
 
@@ -495,73 +521,6 @@ v_{t}^{\vartheta} &= v^{\vartheta}_{t - \Delta t} + \varepsilon_t \cdot \Delta t
 
 
 
-\subsection{Смешанный режим}
-
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{\insertsubsection}
-
-\begin{figure}[ht]
- 		\includemovie[
- 			poster,
-     		externalviewer,
-     		inline=false,
-     		text={\small Смешанный каскадно-водопадный режим работы (14 об/мин)}]{}{}
-     		{smeshan_result.mp4}
-\end{figure}
-
-\alt<2> {
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{smeshan_energy} 
-	\caption{График изменения энергии во времени при смешанном каскадно-водопадном режиме работы мельницы}
-	\label{pic:smeshan_energy}
-\end{figure} 
-}
-{
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{smeshan_theory} 
-	\caption{Теоретическая картина смешанного режима}
-\end{figure}
-}
-\end{frame}
-
-
-
-
-
-\subsection{Водопадный режим}
-
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{\insertsubsection}
-
-\begin{figure}[ht]
- 		\includemovie[
- 			poster,
-     		externalviewer,
-     		inline=false,
-     		text={\small Водопадный режим работы шаровой мельницы (17 об/мин)}]{}{}
-     		{vodopad_result.mp4}
-\end{figure}
-\alt<2> {
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{vodopad_energy} 
-	\caption{График изменения энергии во времени при водопадном режиме работы мельницы}
-	\label{pic:vodopad_energy}
-\end{figure} 
-}
-{
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{vodopad_theory} 
-	\caption{Теоретическая картина водопадного режима}
-\end{figure}
-}
-
-\end{frame}
 
 
 
@@ -571,34 +530,6 @@ v_{t}^{\vartheta} &= v^{\vartheta}_{t - \Delta t} + \varepsilon_t \cdot \Delta t
 
 
 
-\subsection{С превышением критической частоты}
-
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{\insertsubsection}
-\begin{figure}[ht]
- 		\includemovie[
- 			poster,
-     		externalviewer,
-     		inline=false,
-     		text={\small Превышение критической частоты (30 об/мин)}]{}{}
-     		{kritic_result.mp4}
-\end{figure}
-\alt<2> {
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{kritic_energy} 
-	\caption{График изменения энергии во времени при превышении критической частоты}
-\end{figure}
-}
-{
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\textwidth]{kritic_theory} 
-	\caption{Теоретическая картина закритического режима}
-\end{figure}
-}
-\end{frame}
 
 
 \begin{frame}
