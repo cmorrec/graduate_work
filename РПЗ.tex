@@ -1,4 +1,6 @@
 % !TEX program = xelatex
+
+
 %----------------------- Преамбула -----------------------
 \documentclass[utf8x, 14pt, oneside, a4paper]{article}
 
@@ -6,10 +8,13 @@
 
 % Для работы с несколькими языками и шрифтом Times New Roman по-умолчанию
 \usepackage[english,russian]{babel}
-%\usepackage{fontspec}
-%\setmainfont{Times New Roman}
-\usepackage{pscyr}
-\renewcommand{\rmdefault}{ftm}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+%\usepackage{pscyr}
+%\renewcommand{\rmdefault}{ftm}
+
 % ГОСТовские настройки для полей и абзацев
 \usepackage[left=30mm,right=15mm,top=20mm,bottom=20mm]{geometry}
 \usepackage{misccorr}
@@ -152,6 +157,7 @@
 \usepackage{rotating} % Поворот изображения вместе с названием
 \usepackage{lastpage} % Для подсчета числа страниц
 \usepackage{ragged2e}
+\usepackage{listings}
 \justifying
 
 
@@ -193,9 +199,9 @@
 		\begin{flushleft}
 			\fontsize{12pt}{0.8\baselineskip}\selectfont 
 			
-			ФАКУЛЬТЕТ \uline{<<\textbf{<Факультет (полностью)>}>> \hfill}
+			ФАКУЛЬТЕТ \uline{<<\textbf{Робототехника и комплексная автоматизация}>> \hfill}
 
-			КАФЕДРА \uline{\hspace{4mm} <<\textbf{<Кафедра (полностью)>}>> \hfill}
+			КАФЕДРА \uline{\hspace{4mm} <<\textbf{Прикладная механика}>> \hfill}
 		\end{flushleft}
 
 		\vfill
@@ -230,21 +236,21 @@
 			\fontsize{12pt}{0.7\baselineskip}\selectfont
 			\centering
 			\begin{signstabular}[0.7]{p{7.25cm} >{\centering\arraybackslash}p{4cm} >{\centering\arraybackslash}p{4cm}}
-				Студент группы \textbf{<Группа (Шифр)>} & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{<И.О. Фамилия>} \hfill} \\
+				Студент группы \textbf{РК5-82Б} & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{А.А. Катнов} \hfill} \\
 				& \scriptsize (Подпись, дата) & \scriptsize (И.О. Фамилия)
 			\end{signstabular}
 
 			\vspace{\baselineskip}
 
 			\begin{signstabular}[0.7]{p{7.25cm} >{\centering\arraybackslash}p{4cm} >{\centering\arraybackslash}p{4cm}}
-				Руководитель ВКР & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{<И.О. Фамилия>} \hfill} \\
+				Руководитель ВКР & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{Н.А. Жуков} \hfill} \\
 				& \scriptsize (Подпись, дата) & \scriptsize (И.О. Фамилия)
 			\end{signstabular}
 
 			\vspace{\baselineskip}
 
 			\begin{signstabular}[0.7]{p{7.25cm} >{\centering\arraybackslash}p{4cm} >{\centering\arraybackslash}p{4cm}}
-				Нормоконтроллер & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{<И.О. Фамилия>} \hfill} \\
+				Нормоконтроллер & \uline{\hspace*{4cm}} & \uline{\hfill \textbf{С.М. Ганыш} \hfill} \\
 				& \scriptsize (Подпись, дата) & \scriptsize (И.О. Фамилия)
 			\end{signstabular}
 		\end{table}
@@ -252,7 +258,7 @@
 		\vfill
 
 		\begin{center}
-			\normalsize \textit{\textbf{<Год>} г.}
+			\normalsize \textit{\textbf{2021} г.}
 		\end{center}
 	\end{titlepage}
 \pagebreak
@@ -1158,15 +1164,15 @@ $R$ --- радиус мельницы, [м].
 \zeta_n = 0.1 \qquad \qquad \qquad \zeta_t = 0.1
 \]
 Стенка тоже принята стальной и имеет все те же параметры.
-Мельница имеет радиус 2.5 м.
+Мельница имеет радиус 1 м.
 В мельницы будет находиться 120 шаров.
-Это значит, что по объему она заполнена на 21 \%.
+Это значит, что по объему она заполнена на 50 \%.
 
 Таким образом можем определить $n_0$ по формуле \ref{freq_kritic}. 
-В нашем случае $n_0 = 20$ оборотов в минуту (или 2.1 рад / с).
+В нашем случае $n_0 = 140$ оборотов в минуту (или 14.76 рад / с).
 
 Шаг по времени равен 10$^{-5}$ секунды.
-Каждый эксперимент  проводился в течение 10 секунд.
+Каждый эксперимент  проводился в течение 15 секунд.
 В реальности расчёт занимал больше времени.
 
 
@@ -1193,15 +1199,15 @@ $R$ --- радиус мельницы, [м].
 \hline
 Плотность руды & 4800 кг/м$^3$ \\
 \hline
-Минимальная энергия разрушения руды & 0.1 Дж \\
+Минимальная энергия разрушения руды & 25 Дж \\
 \hline
-Параметр прочности & 1 1/Дж \\
+Параметр прочности & 0.001 1/Дж \\
 \hline
-Размеры сита по ширине & 1 м \\
+Размеры сита по ширине & 0.5 м \\
 \hline
-Размеры сита по ширине & 1 м \\
+Размеры сита по высоте & 0.5 м \\
 \hline
-Пропускная способность сита & 0.04 м \\
+Пропускная способность сита & 0.049 м \\
 \hline
 К-т диссипации в норм-ом направлении & 0.1 \\
 \hline
@@ -1211,13 +1217,13 @@ $R$ --- радиус мельницы, [м].
 \hline
 К-т трения качения & 0.05 \\
 \hline
-Радиус шаровой мельницы & 2.5 м \\
+Радиус шаровой мельницы & 1 м \\
 \hline
 Изначальный радиус шаров & 0.1 м \\
 \hline
 Количество шаров & 120 \\
 \hline
-Процент заполненности мельницы & 21 \% \\
+Процент заполненности мельницы & 50 \% \\
 \hline
 Шаг по времени & 10$^{-5}$ сек \\
 \hline
@@ -1278,7 +1284,7 @@ $y_b$ -- координата центра шара по оси OY.
 
 \subsection{Каскадный режим работы}
 
-При частоте вращения мельницы 0.2 рад / с (1.9 оборотов в минуту) можем наблюдать каскадный режим работы.
+При частоте вращения мельницы 2.25 рад / с (21.5 оборотов в минуту) можем наблюдать каскадный режим работы.
 Графики изменения энергии (этот и следующие: \ref{pic:kaskad_energy}, \ref{pic:vodopad_energy}, \ref{pic:smeshan_energy}, \ref{pic:kritic_energy}) показывает, что диссипирующая система, которая получает постоянную подпитку энергией извне (стенка крутится, тем самым разгоняя шары) приходит к примерно равновесному по энергии состоянию.
 
 \begin{figure}[H]
@@ -1297,7 +1303,7 @@ $y_b$ -- координата центра шара по оси OY.
 
 \subsection{Водопадный режим работы}
 
-Данный режим работы достигается при 1.8 рад / с (17.19 оборотов в минуту).
+Данный режим работы достигается при 8.5 рад / с (81.16 оборотов в минуту).
 Для более выразительной картины данного режима (рисунок \ref{pic:vodopad_theory}) количество шаров увеличено до 240. 
 Таким образом заполненность мельницы увеличивается до 42 процентов что близко к максимальному кпд. 
 
@@ -1317,10 +1323,11 @@ $y_b$ -- координата центра шара по оси OY.
 
 \subsection{Смешанный каскадно-водопадный режим работы}
 
-Данный режим работы достигается при 1.5 рад / с (14.32 оборотов в минуту).
+Данный режим работы достигается при 6 рад / с (57.3 оборотов в минуту).
 Как уже было сказано ранее этот режим является наиболее удачным для измельчения руды.
 И это видно: часть шаров перекатывается, а часть шаров падает на них сверху.
 Это и создает ударную нагрузку, необходимую для разрушения.
+Водопадный и закритический режимы тоже создают ударную нагрузку но на практике по соотношению различных характеристик (прочностных для мельницы и энергетических, финансовых для производства) используется именно этот режим.
 
 \begin{figure}[H]
 	\centering
@@ -1338,8 +1345,9 @@ $y_b$ -- координата центра шара по оси OY.
 
 \subsection{Режим работы мельницы при закритической частоте}
 
-Для более быстрого установления характерной картины (рисунок \ref{pic:kritic_theory}) выберем частоту работы мельницы, превышаюшую теоретическую в несколько раз.
-В данном примере мельница врашается со скоростью 10 рад / с (95.49 оборотов в минуту).
+Для более быстрого установления характерной картины (рисунок \ref{pic:kritic_theory}) выберем частоту работы мельницы, немного превышаюшую теоретическую.
+В данном примере мельница врашается со скоростью 15 рад / с (143.235 оборотов в минуту).
+Этот режим дает наибольшее перемалывание частиц.
 
 \begin{figure}[H]
 	\centering
@@ -1355,6 +1363,19 @@ $y_b$ -- координата центра шара по оси OY.
 	\label{pic:kritic_energy}
 \end{figure} 
 
+\subsection{График распределения эффективности работы мельницы}
+
+На графике \ref{pic:efficiency} представлена зависимость эффективности перемалывания руды от скорости вращения шаровой мельницы. 
+Эффективность определяется как отношение объема просеянной руды к суммарному объему руды.
+Как видно из этого графика при увеличении скорости растет и эффективность работы мельницы.
+На практике же испольльзуют каскадно-водопадный и водопадный режимы работы.
+Это связано с прочностными характеристиками мельницы и энергетическими затратами по содержанию и обслуживанию мельницы.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{efficiency} 
+	\caption{График изменения эффективности работы мельницы при изменении скорости вращения мельницы}
+	\label{pic:efficiency}
+\end{figure} 
 
 		\pagebreak
 		
@@ -1389,4 +1410,299 @@ $y_b$ -- координата центра шара по оси OY.
 
 \end{thebibliography}
 		\pagebreak
+		
+\section*{ПРИЛОЖЕНИЕ А Листинг программы}
+	\addcontentsline{toc}{section}{ПРИЛОЖЕНИЕ А Листинг программы}
+\begin{lstlisting}
+from BallForce import *
+from EventBus import EventBus, destroyBall, draw
+
+
+class BreakBall(BallForce):
+    def __init__(self, x, y, radius, radiusBegin, alpha, velocity, velocityTheta, cn, cs, density, Emod, nu, color,
+                 canvas, eventBus: EventBus):
+        BallForce.__init__(self, x, y, radius, alpha, velocity, velocityTheta, cn, cs, density, Emod, nu, color, canvas)
+        self.strength = 0.001
+        self.minEnergy = 25 * radius / radiusBegin
+        self.breakEnergy = 0
+        self.probability = 0
+        self.eventBus = eventBus
+        self.radiusBegin = radiusBegin
+        self.interactionCountFlag = False
+
+    def move(self):
+        self.wallInteract()
+        self.transfer()
+        self.interactionCountFlag = True
+
+        wall = MoveWall.getInstance()
+        if self.radius <= wall.throughput:
+            if wall.inDeleteCell(self):
+                self.destruct(isNewBalls=False)
+
+    def reactForEndInteraction(self, maxEnergy):
+        if maxEnergy > self.minEnergy:
+            self.breakEnergy += maxEnergy - self.minEnergy
+            self.probability = 1 - exp(-1 * self.strength * self.breakEnergy)
+        if self.isDestruct():
+            self.destruct()
+
+    def isDestruct(self) -> bool:
+        if self.radius < 0.5 * self.radiusBegin:
+            return False
+        for interaction in self.interactionArray:
+            if not interaction.isBall:
+                return False
+        choice = [True, False]
+        probability = [self.probability, 1 - self.probability]
+        return rand.choice(choice, size=1, p=probability)
+
+    def destruct(self, isNewBalls=True):
+        newBalls = []
+        if isNewBalls:
+            newBalls = self.getNewBalls()
+        data = {
+            'newBalls': newBalls,
+            'destroyingBall': self
+        }
+        self.canvas.delete(self.id)
+        self.canvas.delete(self.id2)
+        self.eventBus.emit(destroyBall, data)
+
+    def getNewBall(self, beta, newRadius):
+        delta = self.radius - newRadius
+        newBall = BreakBall(self.x + delta * cos(beta), self.y + delta * sin(beta), newRadius, self.radiusBegin,
+                            self.alphaRadian / pi * 180, self.velocityAbsolute, self.velocityTheta, self.cn, self.cs,
+                            self.density, self.Emod, self.nu, self.color, self.canvas, self.eventBus)
+        newBall.addVelocity(self.velocityAbsolute * cos(beta) / deltaTime / 5,
+                            self.velocityAbsolute * sin(beta) / deltaTime / 5, 0)
+
+        return newBall
+
+    def getNewBalls(self):
+        numOfBalls = getBallsNum()
+        newRadius = self.radius / (numOfBalls ** (1 / 3))
+        deltaBeta = 2 * pi / numOfBalls
+        beta = 0
+        balls = []
+        while numOfBalls > 0:
+            balls.append(self.getNewBall(beta, newRadius))
+            beta += deltaBeta
+            numOfBalls -= 1
+
+        return balls
+\end{lstlisting}
+\pagebreak
+\begin{lstlisting}
+from BreakBall import BreakBall
+from EventBus import EventBus, destroyBall
+from BallForce import *
+from Elements import *
+
+
+def isCrossForce(ball1: BallForce, ball2: BallForce):
+    if distanceNow(ball1, ball2) < (ball1.radius + ball2.radius):
+        return True
+    return False
+
+
+def findLocalVelocities(ball, gama):
+    alphaRadianLocal = ball.alphaRadian - gama
+    # Скорости шаров в локальной системе координат
+    velocityXLocal = ball.velocityAbsolute * cos(alphaRadianLocal)
+    velocityYLocal = ball.velocityAbsolute * sin(alphaRadianLocal)
+
+    return velocityXLocal, velocityYLocal
+
+
+def findRelativeVelocityY(velocityYLocal, ball_1, ball_2):
+    return velocityYLocal - ((ball_1.velocityTheta * ball_1.radius) + (ball_2.velocityTheta * ball_2.radius))
+
+
+def dampingLocalVelocity(velocity, velocityRelative, c):
+    dampening = velocityRelative * c
+    velocity = dampeningVelocity(dampening, velocity)
+    return velocity
+
+
+def methodForce(ball_1, ball_2):
+    gama = atan2((ball_1.y - ball_2.y), (ball_1.x - ball_2.x))
+
+    E_eff = ((1 - (ball_1.nu ** 2)) / ball_1.Emod + (1 - (ball_2.nu ** 2)) / ball_2.Emod) ** (-1)
+    G_eff = ((2 - ball_1.nu) / ball_1.Gmod + (2 - ball_2.nu) / ball_2.Gmod) ** (-1)
+
+    velocity1XLocal, velocity1YLocal = findLocalVelocities(ball_1, gama)
+    velocity2XLocal, velocity2YLocal = findLocalVelocities(ball_2, gama)
+
+    velocity1XRelative = velocity1XLocal - velocity2XLocal
+    velocity2XRelative = velocity2XLocal - velocity1XLocal
+
+    entryNormal = (ball_1.radius + ball_2.radius - sqrt((ball_1.x - ball_2.x) ** 2 + (ball_1.y - ball_2.y) ** 2))
+    radiusEffective = ((1 / ball_1.radius) + (1 / ball_2.radius)) ** (-1)
+
+    stiffness = getStiffness(radiusEffective, entryNormal, E_eff)
+    forceNormal1 = stiffness * entryNormal
+    forceNormal2 = -1 * stiffness * entryNormal
+
+    # forcePlot.append(forceNormal1)
+    # velocityPlot.append(velocity1XLocal * 10000)
+    # if len(stepCountForce) == 0:
+    #     stepCountForce.append(0)
+    # else:
+    #     stepCountForce.append(stepCountForce[len(stepCountForce) - 1] + 1)
+
+    accelerationNormal1 = forceNormal1 / ball_1.mass
+    accelerationNormal2 = forceNormal2 / ball_2.mass
+
+    velocity1YRelative = zeroToZeroBig(findRelativeVelocityY(velocity1YLocal - velocity2YLocal, ball_1, ball_2))
+    velocity2YRelative = -1 * velocity1YRelative
+    signVelocityRelativeTangent1 = customSign(velocity1YRelative)
+    signVelocityRelativeTangent2 = customSign(velocity2YRelative)
+
+    velocityThetaRelative = ball_1.velocityTheta + ball_2.velocityTheta
+    signVelocityRelativeAngular = customSign(velocityThetaRelative)
+
+    accelerationAngular1, accelerationTangent1 = ball_1.findAccelerationAngular(signVelocityRelativeTangent1,
+                                                                                abs(forceNormal1), 1, radiusEffective,
+                                                                                signVelocityRelativeAngular)
+
+    accelerationAngular2, accelerationTangent2 = ball_2.findAccelerationAngular(signVelocityRelativeTangent2,
+                                                                                abs(forceNormal2), -1, radiusEffective,
+                                                                                signVelocityRelativeAngular)
+    jerkNormal1, jerkTangent1, jerkAngular1 = ball_1.getJerk(entryNormal, velocity1XLocal,
+                                                             accelerationNormal1,
+                                                             signVelocityRelativeTangent1, 1, radiusEffective,
+                                                             signVelocityRelativeAngular,
+                                                             accelerationAngular1,
+                                                             accelerationTangent1, E_eff)
+                                                             
+    jerkNormal2, jerkTangent2, jerkAngular2 = ball_2.getJerk(entryNormal, velocity2XLocal,
+                                                             accelerationNormal2,
+                                                             signVelocityRelativeTangent2, -1, radiusEffective,
+                                                             signVelocityRelativeAngular,
+                                                             accelerationAngular2,
+                                                             accelerationTangent2, E_eff)
+
+    # ----------------------------- Damping part -----------------------------
+    accelerationDampeningNormal1 = velocity1XRelative * getDampingNormal(radiusEffective, entryNormal, ball_1.mass,
+                                                                         ball_1.cn, E_eff) / ball_1.mass * (-1)
+    accelerationDampeningTangent1 = velocity1YRelative * getDampingTangent(radiusEffective, entryNormal, ball_1.mass,
+                                                                           ball_1.cs, G_eff) / ball_1.mass
+    accelerationNormal1 += accelerationDampeningNormal1
+    accelerationTangent1 += accelerationDampeningTangent1
+
+    accelerationDampeningNormal2 = velocity2XRelative * getDampingNormal(radiusEffective, entryNormal,
+                                                                         ball_2.mass, ball_2.cn,
+                                                                         E_eff) / ball_2.mass * (-1)
+    accelerationDampeningTangent2 = velocity2YRelative * getDampingTangent(radiusEffective, entryNormal,
+                                                                           ball_2.mass, ball_2.cs, G_eff) / ball_2.mass
+    accelerationNormal2 += accelerationDampeningNormal2
+    accelerationTangent2 += accelerationDampeningTangent2
+    # ----------------------------- End damping part -----------------------------
+
+    interactionCountFlag = ball_1.interactionCountFlag and ball_2.interactionCountFlag
+
+    ball_1.saveAccelerationLength(gama, accelerationNormal1, accelerationTangent1, jerkNormal1, jerkTangent1,
+                                  jerkAngular1, entryNormal, accelerationAngular1, isBall=True, number=ball_2,
+                                  stiffness=stiffness, interactionCountFlag=interactionCountFlag)
+    ball_2.saveAccelerationLength(gama, accelerationNormal2, accelerationTangent2, jerkNormal2, jerkTangent2,
+                                  jerkAngular2, entryNormal, accelerationAngular2, isBall=True, number=ball_1,
+                                  stiffness=stiffness, interactionCountFlag=interactionCountFlag)
+
+
+def isCrossBefore(i, numberOfJ):  # Возможно стоит удалить две неиспользуемых переменных
+    for interaction in i.interactionArray:
+        if interaction.isBall and interaction.number is numberOfJ:
+            return True
+    return False
+
+
+def deleteInteraction(i, numberOfJ, recursion = True):
+    for interaction in i.interactionArray:
+        if interaction.isBall and interaction.number is numberOfJ:
+            if isinstance(i, BreakBall) and recursion:
+                i.reactForEndInteraction(interaction.maxEnergy)
+            if interaction in i.interactionArray:
+                i.interactionArray.remove(interaction)
+            break
+
+
+class ElementsForce(Elements):
+    def __init__(self, balls, canvas, eventBus: EventBus):
+        Elements.__init__(self, balls, canvas)
+        self.newBalls = []
+        self.removingBalls = []
+        self.eventBus = eventBus
+        self.eventBus.on(destroyBall, self.destruct)
+        self.recalculateGrid = True
+
+    def calculation(self):
+        # Есть необходимость отключения не глобальных ускорений,
+        # а ускорений взаимодействия, что проверяется отдельно
+        if len(self.newBalls) > 0 or self.recalculateGrid:
+            for ball in self.removingBalls:
+                index = -1
+                for i, ball_ in enumerate(self.balls):
+                    if ball_ == ball:
+                        index = i
+                        break
+                if index == -1:
+                    print('elemForce -> destruct -> i try to remove ball that does not exist')
+                    exit(1)
+                for pair in self.pairs:
+                    i = pair.i.number
+                    j = pair.j.number
+                    if i != index and j != index:
+                        continue
+                    elif j == index:
+                        i, j = j, i
+                    deleteInteraction(self.balls[j], self.balls[index], False)
+
+            for ball in self.removingBalls:
+                if ball in self.balls:
+                    self.balls.remove(ball)
+            self.balls.extend(self.newBalls)
+            self.newBalls.clear()
+            self.removingBalls.clear()
+            self.pairs = self.hashTable.getPairs(self.balls)
+            self.recalculateGrid = False
+
+        for pair in self.pairs:
+            i = pair.i.number
+            j = pair.j.number
+            ball_i = self.balls[i]
+            ball_j = self.balls[j]
+            if isCrossForce(ball_i, ball_j):
+                methodForce(ball_i, ball_j)
+            elif isCrossBefore(ball_i, ball_j):
+                deleteInteraction(ball_i, ball_j)
+                deleteInteraction(ball_j, ball_i)
+
+    def destruct(self, data):
+        ball = data['destroyingBall']
+        for ball_ in self.removingBalls:
+            if ball_ is ball:
+                return
+        newBalls = data['newBalls']
+        self.removingBalls.append(ball)
+        self.newBalls.extend(newBalls)
+        self.recalculateGrid = True
+        if len(newBalls) == 0:
+            self.deadBalls.append(ball.radius)
+
+    def makeNewBall(self):
+        print('It`s new ball')
+        lastBall = self.balls[-1]
+        radius = lastBall.radiusBegin if isinstance(lastBall, BreakBall) else lastBall.radius
+        wall = MoveWall.getInstance()
+        self.newBalls.append(BreakBall(x=3/2 * wall.centerX,
+                                       y=1/2 * wall.centerX,
+                                       radius=radius, radiusBegin=radius,
+                                       alpha=0, velocity=0, velocityTheta=0,
+                                       cn=lastBall.cn, cs=lastBall.cs, nu=lastBall.nu,
+                                       density=lastBall.density, Emod=lastBall.Emod,
+                                       color=lastBall.color, canvas=self.canvas,
+                                       eventBus=self.eventBus))
+\end{lstlisting}
+\pagebreak
 \end{document}
