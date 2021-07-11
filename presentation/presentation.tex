@@ -153,7 +153,7 @@ Cundall P. A. A computer model for simulating progressive, large-scale movement 
 	\includegraphics[width=0.5\textheight]{local}
 	\includegraphics[width=0.4\textheight]{ball_wall}
 	\includegraphics[width=0.3\textheight]{ball_simple}
-	\caption{Частица-частица $\qquad$ Частица-шар $\qquad$ Свободный полет $\qquad$}
+	\caption{Частица-частица $\qquad$ Частица-стена $\quad$ Свободный полет $\qquad$}
 \end{figure} 
 \end{frame}
 
@@ -401,7 +401,6 @@ b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t}
 \framesubtitle{Совокупность уравнений}
 С контактным взаимодействием
 \begin{figure}[h!]
-	\centering
 	\includegraphics[width=0.4\textwidth]{ur_with}
 \end{figure} 
 В свободном полете
@@ -452,31 +451,16 @@ b_{\vartheta} &= \dfrac{\varepsilon_{t + \Delta t} - \varepsilon_{t}}{\Delta t}
 E_t = E_{t-\Delta t} + E - E_{min}
 \end{equation}
 \begin{equation}
-E = \frac{k \cdot \delta^2}{2}
+E = \int^{\delta_{max}}_0 k_n (\delta) \cdot \delta d \delta
 \end{equation}
 \begin{equation}
 P = 1 - e^{-S \cdot E_t} 
 \end{equation}
-Белоглазов И. И., Иконников Д. А. Применение метода дискретных элементов для моделирования процесса измельчения горных пород в щековой дробилке //Известия высших учебных заведений. Приборостроение. – 2016. – Т. 59. – №. 9.
+$S, E_{min}$ -- параметры материала
+
+\small Белоглазов И. И., Иконников Д. А. Применение метода дискретных элементов для моделирования процесса измельчения горных пород в щековой дробилке //Известия высших учебных заведений. Приборостроение. – 2016. – Т. 59. – №. 9.
 \end{frame}
 
-
-\begin{frame}
-\frametitle{\insertsection} 
-\framesubtitle{\insertsubsection}
-\begin{equation*}
-R_{old}^3 = 2 \cdot R^3_{new} \qquad \rightarrow \qquad R_{new} =\frac{R_{old}}{\sqrt[3]{2}}
-\end{equation*}
-\begin{equation*}
-S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot R_{new}^2}{2} = \sqrt[3]{2} \cdot \frac{\pi \cdot R_{old}^2}{2} = \sqrt[3]{2} \cdot S_{old}
-\end{equation*}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.4\textwidth]{1_balls}
-	\includegraphics[width=0.4\textwidth]{2_balls}
-	\caption{Демонстрация положения разрушенных частиц}
-\end{figure} 
-\end{frame}
 
 
 \begin{frame}
@@ -806,13 +790,35 @@ S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot
 \begin{frame}
 \frametitle{\insertsection} 
 \framesubtitle{Распределение эффективности работы мельницы}
+\[
+eff = \frac{m_{sieved}}{m_{sum}}
+\]
+\small $m_{sieved}$ -- масса просеянной руды
+
+\small $m_{sum}$ -- масса всей руды
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{efficiency} 
-	\caption{График изменения эффективности работы мельницы при изменении скорости вращения мельницы}
+	\includegraphics[width=0.5\textwidth]{efficiency1} 
+	\caption{\small График изменения эффективности работы мельницы при изменении скорости вращения мельницы}
 	\label{pic:efficiency}
 \end{figure} 
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Выводы} 
+В данной работе:
+
+	--- разработана математическая модель взаимодействия частиц;
+
+	--- рассмотрены 4 характерных режима работа мельницы;
+
+	--- произведена оценка эффективности для каждого из рассмотренных режимов;
+
+	--- для полноценного исследования эффективности режимов работы также следует рассматривать скорость подачи руды в качестве дополнительного параметра режима.
+
+\end{frame}
+
 
 
 
@@ -867,7 +873,22 @@ S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot
 \end{frame}
 
 
-
+\begin{frame}
+\frametitle{Доп. материалы} 
+\framesubtitle{Рождение новых частиц}
+\begin{equation*}
+R_{old}^3 = 2 \cdot R^3_{new} \qquad \rightarrow \qquad R_{new} =\frac{R_{old}}{\sqrt[3]{2}}
+\end{equation*}
+\begin{equation*}
+S_{old} = \frac{\pi \cdot R_{old}^2}{2} \qquad S_{new} = 2 \cdot \frac{\pi \cdot R_{new}^2}{2} = \sqrt[3]{2} \cdot \frac{\pi \cdot R_{old}^2}{2} = \sqrt[3]{2} \cdot S_{old}
+\end{equation*}
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\textwidth]{1_balls}
+	\includegraphics[width=0.4\textwidth]{2_balls}
+	\caption{Демонстрация положения разрушенных частиц}
+\end{figure} 
+\end{frame}
 
 
 
